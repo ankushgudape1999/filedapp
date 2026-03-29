@@ -2,1022 +2,503 @@
 
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Field Rep Daily Report</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>Field Rep Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --bg: #0d0f14;
-    --card: #161920;
-    --card2: #1e2230;
-    --accent: #00e5a0;
-    --accent2: #0084ff;
-    --warn: #ff6b35;
-    --text: #f0f2f7;
-    --muted: #6b7280;
-    --border: #2a2f3d;
-    --radius: 16px;
-    --success: #00c97a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    min-height: 100vh;
-    padding-bottom: 40px;
-  }
+:root {
+  --bg: #F0F4FF;
+  --white: #FFFFFF;
+  --primary: #4F46E5;
+  --primary-light: #EEF2FF;
+  --primary-dark: #3730A3;
+  --success: #10B981;
+  --success-light: #ECFDF5;
+  --warn: #F59E0B;
+  --warn-light: #FFFBEB;
+  --danger: #EF4444;
+  --danger-light: #FEF2F2;
+  --text: #1E293B;
+  --text2: #64748B;
+  --text3: #94A3B8;
+  --border: #E2E8F0;
+  --radius: 16px;
+  --shadow: 0 2px 12px rgba(79,70,229,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; overflow-x: hidden; }
+body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; padding-bottom: 100px; }
 
-/* HEADER */
-.app-header {
-background: linear-gradient(135deg, #0d1a2a 0%, #0d0f14 100%);
-padding: 24px 20px 20px;
-border-bottom: 1px solid var(–border);
-position: sticky; top: 0; z-index: 100;
-backdrop-filter: blur(10px);
-}
-.app-header h1 {
-font-family: ‘Syne’, sans-serif;
-font-size: 20px; font-weight: 800;
-letter-spacing: -0.5px;
-background: linear-gradient(90deg, var(–accent), var(–accent2));
--webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.app-header p { font-size: 12px; color: var(–muted); margin-top: 2px; }
+.header { background: var(–primary); padding: 52px 20px 0; position: sticky; top: 0; z-index: 100; }
+.header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.header h1 { font-size: 22px; font-weight: 800; color: #fff; }
+.header-badge { background: rgba(255,255,255,0.2); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+.progress-steps { display: flex; gap: 4px; margin-bottom: 8px; }
+.progress-step { flex: 1; height: 4px; border-radius: 4px; background: rgba(255,255,255,0.25); transition: background 0.3s; }
+.progress-step.done { background: rgba(255,255,255,0.5); }
+.progress-step.active { background: #fff; }
+.progress-label { color: rgba(255,255,255,0.85); font-size: 12px; font-weight: 600; padding-bottom: 14px; }
 
-/* STEP INDICATOR */
-.steps-bar {
-display: flex; gap: 6px;
-padding: 16px 20px 0;
-overflow-x: auto; scrollbar-width: none;
-}
-.steps-bar::-webkit-scrollbar { display: none; }
-.step-dot {
-flex: 1; height: 4px; border-radius: 4px;
-background: var(–border);
-transition: background 0.3s;
-min-width: 30px;
-}
-.step-dot.active { background: var(–accent); }
-.step-dot.done { background: var(–accent2); }
+.page { display: none; }
+.page.active { display: block; animation: slideUp 0.25s ease; }
+@keyframes slideUp { from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);} }
 
-/* SECTION LABEL */
-.section-label {
-display: flex; align-items: center; gap: 10px;
-padding: 20px 20px 8px;
-}
-.section-icon {
-width: 36px; height: 36px; border-radius: 10px;
-display: flex; align-items: center; justify-content: center;
-font-size: 18px; flex-shrink: 0;
-}
-.section-label h2 {
-font-family: ‘Syne’, sans-serif;
-font-size: 17px; font-weight: 700;
-}
-.section-label p { font-size: 12px; color: var(–muted); margin-top: 2px; }
+.section-hero { margin: 16px 16px 0; background: var(–white); border-radius: var(–radius); padding: 18px; box-shadow: var(–shadow); display: flex; align-items: center; gap: 14px; }
+.hero-icon { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+.hero-title { font-size: 19px; font-weight: 800; }
+.hero-sub { font-size: 13px; color: var(–text2); margin-top: 2px; }
 
-/* PAGE */
-.page { display: none; animation: fadeIn 0.3s ease; }
-.page.active { display: block; }
-@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+.card { background: var(–white); border-radius: var(–radius); padding: 18px; margin: 12px 16px 0; box-shadow: var(–shadow); }
+.card-title { font-size: 12px; font-weight: 700; color: var(–text2); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; }
 
-/* CARD */
-.card {
-background: var(–card);
-border: 1px solid var(–border);
-border-radius: var(–radius);
-padding: 16px;
-margin: 8px 16px;
-}
-
-/* FORM FIELDS */
-.field { margin-bottom: 16px; }
+.field { margin-bottom: 14px; }
 .field:last-child { margin-bottom: 0; }
-label {
-display: block;
-font-size: 12px; font-weight: 500;
-color: var(–muted);
-text-transform: uppercase; letter-spacing: 0.5px;
-margin-bottom: 6px;
-}
-label span.req { color: var(–warn); margin-left: 2px; }
-input[type=“text”],
-input[type=“number”],
-input[type=“tel”],
-input[type=“date”],
-input[type=“datetime-local”],
-select, textarea {
-width: 100%;
-background: var(–card2);
-border: 1px solid var(–border);
-border-radius: 10px;
-color: var(–text);
-font-family: ‘DM Sans’, sans-serif;
-font-size: 15px;
-padding: 12px 14px;
-outline: none;
-transition: border-color 0.2s;
--webkit-appearance: none;
-}
-input:focus, select:focus, textarea:focus {
-border-color: var(–accent);
-box-shadow: 0 0 0 3px rgba(0,229,160,0.1);
-}
-textarea { resize: vertical; min-height: 80px; }
-select option { background: var(–card2); }
+.field-label { font-size: 13px; font-weight: 600; color: var(–text); margin-bottom: 7px; }
+.req { color: var(–danger); }
 
-/* PHOTO UPLOAD */
-.photo-upload {
-background: var(–card2);
-border: 2px dashed var(–border);
-border-radius: 12px;
-padding: 20px;
-text-align: center;
-cursor: pointer;
-transition: border-color 0.2s, background 0.2s;
-position: relative;
+input[type=“text”], input[type=“number”], input[type=“tel”], input[type=“date”], select, textarea {
+width: 100%; background: var(–bg); border: 1.5px solid var(–border); border-radius: 12px;
+color: var(–text); font-family: ‘Plus Jakarta Sans’, sans-serif;
+font-size: 15px; font-weight: 500; padding: 13px 15px; outline: none;
+transition: border-color 0.2s, box-shadow 0.2s; -webkit-appearance: none; appearance: none;
 }
-.photo-upload:hover { border-color: var(–accent); background: rgba(0,229,160,0.05); }
-.photo-upload input[type=“file”] {
-position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
-}
-.photo-upload .icon { font-size: 32px; margin-bottom: 8px; }
-.photo-upload p { font-size: 13px; color: var(–muted); }
-.photo-upload .preview {
-width: 100%; max-height: 180px; object-fit: cover;
-border-radius: 8px; margin-top: 10px; display: none;
-}
+input:focus, select:focus, textarea:focus { border-color: var(–primary); box-shadow: 0 0 0 3px rgba(79,70,229,0.1); background: #fff; }
+textarea { resize: none; min-height: 85px; line-height: 1.5; }
+select { background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘16’ height=‘16’ viewBox=‘0 0 24 24’ fill=‘none’ stroke=’%2364748B’ stroke-width=‘2.5’%3E%3Cpath d=‘M6 9l6 6 6-6’/%3E%3C/svg%3E”); background-repeat: no-repeat; background-position: right 13px center; padding-right: 42px; }
 
-/* GPS STATUS */
-.gps-box {
-background: var(–card2);
-border: 1px solid var(–border);
-border-radius: 10px;
-padding: 12px 14px;
-display: flex; align-items: center; gap: 10px;
-}
-.gps-dot {
-width: 10px; height: 10px; border-radius: 50%;
-background: var(–muted); flex-shrink: 0;
-transition: background 0.3s;
-}
-.gps-dot.active { background: var(–accent); box-shadow: 0 0 8px var(–accent); animation: pulse 1.5s infinite; }
-.gps-dot.error { background: var(–warn); }
-@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
-.gps-text { font-size: 13px; color: var(–muted); }
-.gps-btn {
-margin-left: auto;
-background: rgba(0,229,160,0.1);
-border: 1px solid var(–accent);
-color: var(–accent);
-border-radius: 8px; padding: 6px 12px;
-font-size: 12px; font-weight: 500; cursor: pointer;
-font-family: ‘DM Sans’, sans-serif;
-}
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-/* REPEAT ITEMS */
-.repeat-item {
-background: var(–card2);
-border: 1px solid var(–border);
-border-radius: 12px;
-padding: 14px;
-margin-bottom: 10px;
-position: relative;
-}
-.repeat-item .remove-btn {
-position: absolute; top: 10px; right: 10px;
-background: rgba(255,107,53,0.15); border: none;
-color: var(–warn); border-radius: 6px;
-width: 28px; height: 28px; font-size: 16px;
-cursor: pointer; display: flex; align-items: center; justify-content: center;
-}
-.add-btn {
-width: 100%;
-background: rgba(0,229,160,0.08);
-border: 1px dashed var(–accent);
-color: var(–accent);
-border-radius: 10px; padding: 12px;
-font-size: 14px; font-weight: 500;
-cursor: pointer; font-family: ‘DM Sans’, sans-serif;
-transition: background 0.2s;
-margin-top: 4px;
-}
-.add-btn:hover { background: rgba(0,229,160,0.15); }
+.selfie-area { background: var(–bg); border: 2px dashed var(–border); border-radius: 14px; min-height: 170px; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: border-color 0.2s; }
+.selfie-area.has-photo { border-style: solid; border-color: var(–success); }
+.selfie-area img { width: 100%; height: 210px; object-fit: cover; display: none; }
+.selfie-area img.show { display: block; }
+.selfie-ph { text-align: center; padding: 22px; }
+.selfie-ph .big { font-size: 44px; margin-bottom: 8px; }
+.selfie-ph p { font-size: 13px; color: var(–text2); line-height: 1.5; }
+.selfie-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 11px; }
+.btn-cam { background: var(–primary); color: #fff; border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: ‘Plus Jakarta Sans’, sans-serif; }
+.btn-gal { background: var(–primary-light); color: var(–primary); border: none; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: ‘Plus Jakarta Sans’, sans-serif; }
 
-/* NAV BUTTONS */
-.nav-btns {
-display: flex; gap: 10px;
-padding: 16px 16px 8px;
-}
-.btn-back {
-flex: 1;
-background: var(–card2);
-border: 1px solid var(–border);
-color: var(–text);
-border-radius: 12px; padding: 14px;
-font-size: 15px; font-weight: 500;
-cursor: pointer; font-family: ‘DM Sans’, sans-serif;
-}
-.btn-next {
-flex: 2;
-background: linear-gradient(135deg, var(–accent), #00b87a);
-border: none; color: #0d0f14;
-border-radius: 12px; padding: 14px;
-font-size: 15px; font-weight: 700;
-cursor: pointer; font-family: ‘Syne’, sans-serif;
-letter-spacing: 0.3px;
-transition: opacity 0.2s, transform 0.1s;
-}
-.btn-next:active { transform: scale(0.98); }
-.btn-submit {
-width: calc(100% - 32px);
-margin: 8px 16px;
-background: linear-gradient(135deg, #00e5a0, #0084ff);
-border: none; color: #fff;
-border-radius: 14px; padding: 16px;
-font-size: 16px; font-weight: 700;
-cursor: pointer; font-family: ‘Syne’, sans-serif;
-letter-spacing: 0.5px;
-box-shadow: 0 4px 20px rgba(0,229,160,0.3);
-transition: opacity 0.2s, transform 0.1s;
-}
-.btn-submit:active { transform: scale(0.98); }
-.btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.time-chip { background: var(–primary-light); border-radius: 12px; padding: 14px 15px; display: flex; align-items: center; gap: 12px; }
+.time-chip .ti { font-size: 26px; }
+.time-chip .tv { font-size: 18px; font-weight: 800; color: var(–primary); }
+.time-chip .ts { font-size: 11px; color: var(–text2); margin-top: 2px; }
 
-/* SUCCESS SCREEN */
-#successScreen {
-display: none;
-text-align: center;
-padding: 60px 24px;
-}
-#successScreen .check {
-width: 80px; height: 80px;
-background: rgba(0,229,160,0.15);
-border: 2px solid var(–accent);
-border-radius: 50%;
-display: flex; align-items: center; justify-content: center;
-font-size: 36px; margin: 0 auto 24px;
-animation: popIn 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
-}
-@keyframes popIn { from{transform:scale(0);} to{transform:scale(1);} }
-#successScreen h2 { font-family:‘Syne’,sans-serif; font-size:24px; font-weight:800; margin-bottom:10px; }
-#successScreen p { color:var(–muted); font-size:14px; line-height:1.6; }
-.new-entry-btn {
-margin-top: 32px;
-background: var(–card);
-border: 1px solid var(–border);
-color: var(–text);
-border-radius: 12px; padding: 14px 28px;
-font-size: 15px; cursor: pointer;
-font-family: ‘DM Sans’, sans-serif;
-}
+.gps-chip { background: var(–bg); border: 1.5px solid var(–border); border-radius: 12px; padding: 13px 15px; display: flex; align-items: center; gap: 10px; }
+.gps-chip.ok { border-color: var(–success); background: var(–success-light); }
+.gps-dot { width: 9px; height: 9px; border-radius: 50%; background: var(–text3); flex-shrink: 0; }
+.gps-dot.on { background: var(–success); box-shadow: 0 0 0 3px rgba(16,185,129,0.2); animation: blink 1.5s infinite; }
+.gps-dot.err { background: var(–danger); }
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.gps-text { font-size: 13px; color: var(–text2); flex: 1; font-weight: 500; word-break: break-all; }
+.btn-loc { background: var(–primary); color: #fff; border: none; border-radius: 10px; padding: 10px 14px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: ‘Plus Jakarta Sans’, sans-serif; white-space: nowrap; flex-shrink: 0; }
 
-/* TOAST */
-.toast {
-position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-background: var(–card2); border: 1px solid var(–border);
-color: var(–text); padding: 12px 20px;
-border-radius: 10px; font-size: 13px;
-z-index: 999; white-space: nowrap;
-opacity: 0; transition: opacity 0.3s;
-pointer-events: none;
-}
+.upload-box { background: var(–bg); border: 2px dashed var(–border); border-radius: 14px; padding: 22px; text-align: center; cursor: pointer; position: relative; overflow: hidden; transition: all 0.2s; }
+.upload-box:hover { border-color: var(–primary); background: var(–primary-light); }
+.upload-box input[type=“file”] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+.upload-box .ui { font-size: 34px; margin-bottom: 7px; }
+.upload-box .ut { font-size: 14px; font-weight: 600; color: var(–text); margin-bottom: 3px; }
+.upload-box .us { font-size: 12px; color: var(–text2); }
+.upload-box img.preview { width: 100%; max-height: 150px; object-fit: cover; border-radius: 10px; margin-top: 11px; display: none; }
+.upload-box img.show { display: block; }
+
+.repeat-item { background: var(–bg); border: 1.5px solid var(–border); border-radius: 14px; padding: 15px; margin-bottom: 10px; }
+.ri-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 13px; }
+.ri-title { font-size: 14px; font-weight: 700; }
+.btn-rem { background: var(–danger-light); border: none; color: var(–danger); border-radius: 8px; width: 30px; height: 30px; font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+.btn-add { width: 100%; background: var(–primary-light); border: 2px dashed var(–primary); color: var(–primary); border-radius: 13px; padding: 14px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: ‘Plus Jakarta Sans’, sans-serif; margin-top: 4px; }
+
+.nav-fixed { position: fixed; bottom: 0; left: 0; right: 0; background: var(–white); padding: 12px 16px 28px; box-shadow: 0 -3px 16px rgba(0,0,0,0.07); display: flex; gap: 10px; z-index: 200; }
+.btn-back { flex: 1; background: var(–bg); border: 1.5px solid var(–border); color: var(–text); border-radius: 13px; padding: 14px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: ‘Plus Jakarta Sans’, sans-serif; }
+.btn-next { flex: 2; background: var(–primary); color: #fff; border: none; border-radius: 13px; padding: 14px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: ‘Plus Jakarta Sans’, sans-serif; box-shadow: 0 4px 14px rgba(79,70,229,0.3); }
+.btn-submit { width: 100%; background: linear-gradient(135deg,#10B981,#059669); border: none; color: #fff; border-radius: 13px; padding: 16px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: ‘Plus Jakarta Sans’, sans-serif; box-shadow: 0 4px 16px rgba(16,185,129,0.35); display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-submit:disabled { opacity: 0.6; }
+
+.sum-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid var(–border); font-size: 14px; }
+.sum-row:last-child { border-bottom: none; }
+.sl { color: var(–text2); font-weight: 500; }
+.sv { font-weight: 700; color: var(–text); text-align: right; max-width: 55%; }
+
+#successScreen { display: none; padding: 48px 20px; text-align: center; }
+.suc-icon { width: 88px; height: 88px; border-radius: 50%; background: var(–success-light); border: 3px solid var(–success); display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 22px; animation: pop 0.4s cubic-bezier(0.175,0.885,0.32,1.275); }
+@keyframes pop{from{transform:scale(0);}to{transform:scale(1);}}
+.suc-title { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
+.suc-sub { font-size: 14px; color: var(–text2); line-height: 1.6; margin-bottom: 24px; }
+.btn-new { background: var(–primary-light); color: var(–primary); border: none; border-radius: 13px; padding: 14px 32px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: ‘Plus Jakarta Sans’, sans-serif; margin-top: 8px; }
+
+.notice { background: var(–warn-light); border: 1px solid #FDE68A; border-radius: 12px; padding: 12px 14px; font-size: 13px; color: #92400E; font-weight: 500; margin: 12px 16px 0; }
+
+.toast { position: fixed; bottom: 95px; left: 50%; transform: translateX(-50%); background: #1E293B; color: #fff; padding: 12px 20px; border-radius: 12px; font-size: 13px; font-weight: 600; z-index: 999; white-space: nowrap; opacity: 0; transition: opacity 0.3s; pointer-events: none; max-width: 88vw; text-align: center; }
 .toast.show { opacity: 1; }
-.toast.error { border-color: var(–warn); color: var(–warn); }
-.toast.success { border-color: var(–accent); color: var(–accent); }
+.toast.error { background: var(–danger); }
+.toast.success { background: var(–success); }
 
-/* LOADING */
-.spinner {
-display: inline-block; width: 18px; height: 18px;
-border: 2px solid rgba(255,255,255,0.3);
-border-top-color: #fff;
-border-radius: 50%;
-animation: spin 0.7s linear infinite;
-vertical-align: middle; margin-right: 8px;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* INFO BOX */
-.info-row {
-display: flex; justify-content: space-between;
-font-size: 13px; padding: 4px 0;
-border-bottom: 1px solid var(–border);
-}
-.info-row:last-child { border-bottom: none; }
-.info-row span:first-child { color: var(–muted); }
-.info-row span:last-child { font-weight: 500; }
-
-/* SELFIE BOX */
-.selfie-container {
-position: relative; border-radius: 12px; overflow: hidden;
-background: var(–card2); min-height: 200px;
-display: flex; align-items: center; justify-content: center;
-}
-#selfiePreview {
-width: 100%; max-height: 260px; object-fit: cover; display: none;
-}
-.selfie-placeholder { text-align: center; padding: 30px; }
-.selfie-placeholder .icon { font-size: 48px; margin-bottom: 10px; }
-.selfie-placeholder p { color: var(–muted); font-size: 13px; }
-.selfie-btns { display: flex; gap: 8px; margin-top: 12px; }
-.selfie-btns button {
-flex: 1; padding: 11px;
-border-radius: 10px; border: 1px solid var(–border);
-background: var(–card2); color: var(–text);
-font-size: 13px; cursor: pointer; font-family: ‘DM Sans’, sans-serif;
-}
-.selfie-btns button.primary {
-background: rgba(0,229,160,0.1); border-color: var(–accent); color: var(–accent);
-}
-
-/* TIME DISPLAY */
-.time-display {
-background: var(–card2); border: 1px solid var(–border);
-border-radius: 10px; padding: 14px;
-display: flex; align-items: center; gap: 12px;
-}
-.time-display .time-icon { font-size: 24px; }
-.time-display .time-val { font-family: ‘Syne’, sans-serif; font-size: 18px; font-weight: 700; }
-.time-display .time-sub { font-size: 11px; color: var(–muted); margin-top: 2px; }
+.spinner { display: inline-block; width: 17px; height: 17px; border: 2px solid rgba(255,255,255,0.35); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
+@keyframes spin{to{transform:rotate(360deg);}}
+.spacer { height: 90px; }
 </style>
 
 </head>
 <body>
 
-<div class="app-header">
-  <h1>⚡ Field Rep Portal</h1>
-  <p id="headerSub">Complete your daily report</p>
+<div class="header">
+  <div class="header-top">
+    <h1>⚡ Field Rep Portal</h1>
+    <span class="header-badge" id="stepBadge">1 of 6</span>
+  </div>
+  <div class="progress-steps">
+    <div class="progress-step active" id="ps0"></div>
+    <div class="progress-step" id="ps1"></div>
+    <div class="progress-step" id="ps2"></div>
+    <div class="progress-step" id="ps3"></div>
+    <div class="progress-step" id="ps4"></div>
+    <div class="progress-step" id="ps5"></div>
+  </div>
+  <div class="progress-label" id="stepLabel">Personal Information</div>
 </div>
 
-<div class="steps-bar" id="stepsBar">
-  <div class="step-dot active" id="dot0"></div>
-  <div class="step-dot" id="dot1"></div>
-  <div class="step-dot" id="dot2"></div>
-  <div class="step-dot" id="dot3"></div>
-  <div class="step-dot" id="dot4"></div>
-  <div class="step-dot" id="dot5"></div>
-</div>
-
-<!-- ===================== PAGE 0: PERSONAL INFO ===================== -->
+<!-- PAGE 0: PERSONAL INFO -->
 
 <div class="page active" id="page0">
-  <div class="section-label">
-    <div class="section-icon" style="background:rgba(0,132,255,0.15);">👤</div>
-    <div>
-      <h2>Personal Info</h2>
-      <p>Step 1 of 6 — Your details</p>
-    </div>
+  <div class="section-hero">
+    <div class="hero-icon" style="background:#EEF2FF;">👤</div>
+    <div><div class="hero-title">Personal Info</div><div class="hero-sub">Tell us who you are</div></div>
   </div>
   <div class="card">
-    <div class="field">
-      <label>Full Name <span class="req">*</span></label>
-      <input type="text" id="repName" placeholder="Enter your full name" />
-    </div>
-    <div class="field">
-      <label>Employee ID <span class="req">*</span></label>
-      <input type="text" id="empId" placeholder="e.g. EMP001" />
-    </div>
-    <div class="field">
-      <label>Phone Number <span class="req">*</span></label>
-      <input type="tel" id="phone" placeholder="+91 XXXXX XXXXX" />
-    </div>
-    <div class="field">
-      <label>Store / Area Name <span class="req">*</span></label>
-      <input type="text" id="storeName" placeholder="Enter store or area name" />
-    </div>
-    <div class="field">
-      <label>Region</label>
-      <input type="text" id="region" placeholder="e.g. North Delhi" />
-    </div>
-    <div class="field">
-      <label>Date</label>
-      <input type="date" id="reportDate" />
+    <div class="field"><div class="field-label">Full Name <span class="req">*</span></div><input type="text" id="repName" placeholder="Enter your full name"/></div>
+    <div class="field"><div class="field-label">Employee ID <span class="req">*</span></div><input type="text" id="empId" placeholder="e.g. EMP001"/></div>
+    <div class="field"><div class="field-label">Phone Number <span class="req">*</span></div><input type="tel" id="phone" placeholder="+91 XXXXX XXXXX"/></div>
+    <div class="field"><div class="field-label">Store / Area Name <span class="req">*</span></div><input type="text" id="storeName" placeholder="Enter store name"/></div>
+    <div class="two-col">
+      <div class="field"><div class="field-label">Region</div><input type="text" id="region" placeholder="e.g. Mumbai"/></div>
+      <div class="field"><div class="field-label">Date</div><input type="date" id="reportDate"/></div>
     </div>
   </div>
-  <div class="nav-btns">
-    <button class="btn-next" onclick="nextPage(0)">Next →</button>
-  </div>
+  <div class="spacer"></div>
+  <div class="nav-fixed"><button class="btn-next" style="flex:1;" onclick="nextPage(0)">Continue →</button></div>
 </div>
 
-<!-- ===================== PAGE 1: CHECK-IN ===================== -->
+<!-- PAGE 1: CHECK-IN -->
 
 <div class="page" id="page1">
-  <div class="section-label">
-    <div class="section-icon" style="background:rgba(0,229,160,0.15);">📍</div>
-    <div>
-      <h2>Check-In</h2>
-      <p>Step 2 of 6 — Selfie + Location + Time</p>
+  <div class="section-hero">
+    <div class="hero-icon" style="background:#ECFDF5;">📍</div>
+    <div><div class="hero-title">Check-In</div><div class="hero-sub">Selfie + Location + Time</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">📸 Check-In Selfie *</div>
+    <div class="selfie-area" id="sa1">
+      <img id="si1" alt="selfie"/>
+      <div class="selfie-ph" id="sp1"><div class="big">🤳</div><p>Take a selfie to verify<br>your presence at the store</p></div>
+    </div>
+    <input type="file" id="sf1" accept="image/*" capture="user" style="display:none" onchange="doSelfie(1,this)"/>
+    <div class="selfie-btns">
+      <button class="btn-cam" onclick="document.getElementById('sf1').click()">📷 Camera</button>
+      <button class="btn-gal" onclick="document.getElementById('sf1').click()">🖼 Gallery</button>
     </div>
   </div>
   <div class="card">
-    <div class="field">
-      <label>Check-In Selfie <span class="req">*</span></label>
-      <div class="selfie-container" id="selfieBox">
-        <img id="selfiePreview" alt="Selfie" />
-        <div class="selfie-placeholder" id="selfiePlaceholder">
-          <div class="icon">🤳</div>
-          <p>Take a selfie to verify your presence</p>
-        </div>
-      </div>
-      <input type="file" id="selfieInput" accept="image/*" capture="user" style="display:none" onchange="handleSelfie(this)" />
-      <div class="selfie-btns">
-        <button class="primary" onclick="document.getElementById('selfieInput').click()">📷 Take Selfie</button>
-        <button onclick="document.getElementById('selfieInput').click()">🖼 Gallery</button>
-      </div>
-    </div>
-    <div class="field">
-      <label>Check-In Time</label>
-      <div class="time-display">
-        <div class="time-icon">🕐</div>
-        <div>
-          <div class="time-val" id="checkinTimeDisplay">--:--</div>
-          <div class="time-sub">Auto recorded on check-in</div>
-        </div>
-      </div>
-    </div>
-    <div class="field">
-      <label>Location</label>
-      <div class="gps-box">
-        <div class="gps-dot" id="checkinGpsDot"></div>
-        <div class="gps-text" id="checkinGpsText">Tap to capture location</div>
-        <button class="gps-btn" onclick="getLocation('checkin')">📍 Capture</button>
-      </div>
-      <input type="hidden" id="checkinLat" />
-      <input type="hidden" id="checkinLng" />
-      <input type="hidden" id="checkinTime" />
-    </div>
-    <div class="field">
-      <label>Notes</label>
-      <textarea id="checkinNotes" placeholder="Any notes about check-in..."></textarea>
-    </div>
+    <div class="card-title">🕐 Check-In Time</div>
+    <div class="time-chip"><div class="ti">🕐</div><div><div class="tv" id="cinTD">Auto-records on Next</div><div class="ts">Captured automatically</div></div></div>
+    <input type="hidden" id="cin_lat"/><input type="hidden" id="cin_lng"/><input type="hidden" id="cin_time"/>
   </div>
-  <div class="nav-btns">
-    <button class="btn-back" onclick="prevPage(1)">← Back</button>
-    <button class="btn-next" onclick="nextPage(1)">Next →</button>
+  <div class="card">
+    <div class="card-title">📍 Your Location</div>
+    <div class="gps-chip" id="gc1"><div class="gps-dot" id="gd1"></div><div class="gps-text" id="gt1">Tap Capture to get your GPS location</div><button class="btn-loc" onclick="doGPS(1)">📍 Capture</button></div>
   </div>
+  <div class="card">
+    <div class="field"><div class="field-label">Notes (Optional)</div><textarea id="cinNotes" placeholder="Any notes about this visit..."></textarea></div>
+  </div>
+  <div class="spacer"></div>
+  <div class="nav-fixed"><button class="btn-back" onclick="prevPage(1)">← Back</button><button class="btn-next" onclick="nextPage(1)">Continue →</button></div>
 </div>
 
-<!-- ===================== PAGE 2: STOCK UPDATE ===================== -->
+<!-- PAGE 2: STOCK -->
 
 <div class="page" id="page2">
-  <div class="section-label">
-    <div class="section-icon" style="background:rgba(255,200,0,0.15);">📦</div>
-    <div>
-      <h2>Stock Update</h2>
-      <p>Step 3 of 6 — Add products</p>
+  <div class="section-hero">
+    <div class="hero-icon" style="background:#FFFBEB;">📦</div>
+    <div><div class="hero-title">Stock Update</div><div class="hero-sub">Add products & upload sheet</div></div>
+  </div>
+  <div class="card" style="padding-bottom:12px;">
+    <div class="card-title">📋 Products</div>
+    <div id="stockItems"></div>
+    <button class="btn-add" onclick="addStock()">＋ Add Product</button>
+  </div>
+  <div class="card">
+    <div class="card-title">📄 Upload Stock Sheet</div>
+    <div class="upload-box">
+      <input type="file" id="stockFile" accept="image/*,.pdf,.xlsx,.xls" onchange="doUpload(this,'stockPrev')"/>
+      <div class="ui">📋</div><div class="ut">Tap to upload stock sheet</div><div class="us">Photo, PDF or Excel</div>
+      <img class="preview" id="stockPrev" alt=""/>
     </div>
   </div>
-  <div id="stockItems"></div>
-  <div style="padding: 0 16px;">
-    <button class="add-btn" onclick="addStockItem()">＋ Add Product</button>
-  </div>
-  <div class="card" style="margin-top:12px;">
-    <div class="field">
-      <label>Upload Stock Sheet (Photo / PDF)</label>
-      <div class="photo-upload" id="stockFileBox">
-        <input type="file" id="stockFile" accept="image/*,.pdf,.xlsx,.xls" onchange="handleFilePreview(this,'stockPreview','stockFileBox')" />
-        <div class="icon">📋</div>
-        <p>Tap to upload stock sheet<br><span style="font-size:11px;color:#555">Photo, PDF or Excel</span></p>
-        <img class="preview" id="stockPreview" alt="preview"/>
-      </div>
-    </div>
-  </div>
-  <div class="nav-btns">
-    <button class="btn-back" onclick="prevPage(2)">← Back</button>
-    <button class="btn-next" onclick="nextPage(2)">Next →</button>
-  </div>
+  <div class="spacer"></div>
+  <div class="nav-fixed"><button class="btn-back" onclick="prevPage(2)">← Back</button><button class="btn-next" onclick="nextPage(2)">Continue →</button></div>
 </div>
 
-<!-- ===================== PAGE 3: EXPENSES ===================== -->
+<!-- PAGE 3: EXPENSES -->
 
 <div class="page" id="page3">
-  <div class="section-label">
-    <div class="section-icon" style="background:rgba(255,107,53,0.15);">🧾</div>
-    <div>
-      <h2>Expenses</h2>
-      <p>Step 4 of 6 — Log your expenses</p>
-    </div>
+  <div class="section-hero">
+    <div class="hero-icon" style="background:#FEF2F2;">🧾</div>
+    <div><div class="hero-title">Expenses</div><div class="hero-sub">Log your daily expenses</div></div>
   </div>
-  <div id="expenseItems"></div>
-  <div style="padding: 0 16px;">
-    <button class="add-btn" onclick="addExpenseItem()">＋ Add Expense</button>
+  <div class="card" style="padding-bottom:12px;">
+    <div class="card-title">💰 Expense Entries</div>
+    <div id="expItems"></div>
+    <button class="btn-add" onclick="addExp()">＋ Add Expense</button>
   </div>
-  <div class="nav-btns">
-    <button class="btn-back" onclick="prevPage(3)">← Back</button>
-    <button class="btn-next" onclick="nextPage(3)">Next →</button>
-  </div>
+  <div class="notice">💡 No expenses today? Just tap Continue to skip.</div>
+  <div class="spacer"></div>
+  <div class="nav-fixed"><button class="btn-back" onclick="prevPage(3)">← Back</button><button class="btn-next" onclick="nextPage(3)">Continue →</button></div>
 </div>
 
-<!-- ===================== PAGE 4: EXPIRED PRODUCTS ===================== -->
+<!-- PAGE 4: EXPIRED -->
 
 <div class="page" id="page4">
-  <div class="section-label">
-    <div class="section-icon" style="background:rgba(255,50,50,0.15);">⚠️</div>
-    <div>
-      <h2>Expired Products</h2>
-      <p>Step 5 of 6 — Report expired items</p>
-    </div>
+  <div class="section-hero">
+    <div class="hero-icon" style="background:#FEF2F2;">⚠️</div>
+    <div><div class="hero-title">Expired Products</div><div class="hero-sub">Report items found expired</div></div>
   </div>
-  <div id="expiredItems"></div>
-  <div style="padding: 0 16px;">
-    <button class="add-btn" onclick="addExpiredItem()">＋ Add Expired Product</button>
+  <div class="card" style="padding-bottom:12px;">
+    <div class="card-title">🗑 Expired Items</div>
+    <div id="expiredItems"></div>
+    <button class="btn-add" style="border-color:var(--danger);color:var(--danger);background:var(--danger-light);" onclick="addExpired()">＋ Add Expired Product</button>
   </div>
-  <div class="card" style="margin-top:8px; border-color: rgba(255,107,53,0.3);">
-    <p style="font-size:12px; color:var(--muted); text-align:center;">No expired products? Leave blank and proceed.</p>
-  </div>
-  <div class="nav-btns">
-    <button class="btn-back" onclick="prevPage(4)">← Back</button>
-    <button class="btn-next" onclick="nextPage(4)">Next →</button>
-  </div>
+  <div class="notice">✅ No expired products found? Just tap Continue.</div>
+  <div class="spacer"></div>
+  <div class="nav-fixed"><button class="btn-back" onclick="prevPage(4)">← Back</button><button class="btn-next" onclick="nextPage(4)">Continue →</button></div>
 </div>
 
-<!-- ===================== PAGE 5: CHECK-OUT ===================== -->
+<!-- PAGE 5: CHECK-OUT -->
 
 <div class="page" id="page5">
-  <div class="section-label">
-    <div class="section-icon" style="background:rgba(0,229,160,0.15);">🏁</div>
-    <div>
-      <h2>Check-Out</h2>
-      <p>Step 6 of 6 — End of day</p>
+  <div class="section-hero">
+    <div class="hero-icon" style="background:#ECFDF5;">🏁</div>
+    <div><div class="hero-title">Check-Out</div><div class="hero-sub">End of day — almost done!</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">📸 Check-Out Selfie *</div>
+    <div class="selfie-area" id="sa2">
+      <img id="si2" alt="selfie"/>
+      <div class="selfie-ph" id="sp2"><div class="big">🤳</div><p>Take a selfie for<br>check-out verification</p></div>
+    </div>
+    <input type="file" id="sf2" accept="image/*" capture="user" style="display:none" onchange="doSelfie(2,this)"/>
+    <div class="selfie-btns">
+      <button class="btn-cam" onclick="document.getElementById('sf2').click()">📷 Camera</button>
+      <button class="btn-gal" onclick="document.getElementById('sf2').click()">🖼 Gallery</button>
     </div>
   </div>
   <div class="card">
-    <div class="field">
-      <label>Check-Out Selfie <span class="req">*</span></label>
-      <div class="selfie-container" id="selfieBox2">
-        <img id="selfiePreview2" alt="Selfie" style="width:100%;max-height:260px;object-fit:cover;display:none;" />
-        <div class="selfie-placeholder" id="selfiePlaceholder2">
-          <div class="icon">🤳</div>
-          <p>Take a selfie for check-out</p>
-        </div>
-      </div>
-      <input type="file" id="selfieInput2" accept="image/*" capture="user" style="display:none" onchange="handleSelfie2(this)" />
-      <div class="selfie-btns">
-        <button class="primary" onclick="document.getElementById('selfieInput2').click()">📷 Take Selfie</button>
-        <button onclick="document.getElementById('selfieInput2').click()">🖼 Gallery</button>
-      </div>
-    </div>
-    <div class="field">
-      <label>Check-Out Time</label>
-      <div class="time-display">
-        <div class="time-icon">🕕</div>
-        <div>
-          <div class="time-val" id="checkoutTimeDisplay">--:--</div>
-          <div class="time-sub">Auto recorded on check-out</div>
-        </div>
-      </div>
-    </div>
-    <div class="field">
-      <label>Location</label>
-      <div class="gps-box">
-        <div class="gps-dot" id="checkoutGpsDot"></div>
-        <div class="gps-text" id="checkoutGpsText">Tap to capture location</div>
-        <button class="gps-btn" onclick="getLocation('checkout')">📍 Capture</button>
-      </div>
-      <input type="hidden" id="checkoutLat" />
-      <input type="hidden" id="checkoutLng" />
-      <input type="hidden" id="checkoutTime" />
-    </div>
-    <div class="field">
-      <label>Day Summary</label>
-      <textarea id="daySummary" placeholder="Brief summary of today's work..."></textarea>
-    </div>
-  </div>
-
-  <!-- REVIEW SUMMARY -->
-
-  <div class="section-label" style="margin-top:8px;">
-    <div><h2 style="font-size:15px;">📋 Submission Summary</h2></div>
+    <div class="card-title">🕕 Check-Out Time</div>
+    <div class="time-chip" style="background:var(--success-light);"><div class="ti">🕕</div><div><div class="tv" style="color:var(--success);" id="coutTD">Auto-records on Submit</div><div class="ts">Captured automatically</div></div></div>
+    <input type="hidden" id="cout_lat"/><input type="hidden" id="cout_lng"/>
   </div>
   <div class="card">
-    <div class="info-row"><span>Rep Name</span><span id="sumName">—</span></div>
-    <div class="info-row"><span>Employee ID</span><span id="sumEmpId">—</span></div>
-    <div class="info-row"><span>Store</span><span id="sumStore">—</span></div>
-    <div class="info-row"><span>Check-In Time</span><span id="sumCheckin">—</span></div>
-    <div class="info-row"><span>Stock Items</span><span id="sumStock">—</span></div>
-    <div class="info-row"><span>Expenses</span><span id="sumExpenses">—</span></div>
-    <div class="info-row"><span>Expired Products</span><span id="sumExpired">—</span></div>
+    <div class="card-title">📍 Check-Out Location</div>
+    <div class="gps-chip" id="gc2"><div class="gps-dot" id="gd2"></div><div class="gps-text" id="gt2">Tap Capture to get your GPS location</div><button class="btn-loc" onclick="doGPS(2)">📍 Capture</button></div>
   </div>
-
-  <div class="nav-btns">
+  <div class="card">
+    <div class="field"><div class="field-label">Day Summary</div><textarea id="daySummary" placeholder="Brief summary of today's work..."></textarea></div>
+  </div>
+  <div class="card" style="background:var(--primary-light);border:1.5px solid #C7D2FE;">
+    <div class="card-title" style="color:var(--primary);">📋 Today's Summary</div>
+    <div class="sum-row"><span class="sl">Rep Name</span><span class="sv" id="sName">—</span></div>
+    <div class="sum-row"><span class="sl">Employee ID</span><span class="sv" id="sEmpId">—</span></div>
+    <div class="sum-row"><span class="sl">Store</span><span class="sv" id="sStore">—</span></div>
+    <div class="sum-row"><span class="sl">Check-In Time</span><span class="sv" id="sCin">—</span></div>
+    <div class="sum-row"><span class="sl">Stock Items</span><span class="sv" id="sStock">—</span></div>
+    <div class="sum-row"><span class="sl">Expenses</span><span class="sv" id="sExp">—</span></div>
+    <div class="sum-row"><span class="sl">Expired Products</span><span class="sv" id="sExpired">—</span></div>
+  </div>
+  <div class="spacer"></div>
+  <div class="nav-fixed">
     <button class="btn-back" onclick="prevPage(5)">← Back</button>
+    <button class="btn-submit" style="flex:2;" id="subBtn" onclick="submitForm()">✅ Submit Report</button>
   </div>
-  <button class="btn-submit" id="submitBtn" onclick="submitForm()">
-    ✅ Submit Daily Report
-  </button>
 </div>
 
-<!-- SUCCESS SCREEN -->
+<!-- SUCCESS -->
 
 <div id="successScreen">
-  <div class="check">✓</div>
-  <h2>Report Submitted!</h2>
-  <p>Your daily report has been successfully saved.<br>Your manager can now view your data.</p>
-  <br>
-  <div class="card" style="text-align:left;">
-    <div class="info-row"><span>Submitted By</span><span id="sucName">—</span></div>
-    <div class="info-row"><span>Date</span><span id="sucDate">—</span></div>
-    <div class="info-row"><span>Check-In</span><span id="sucCheckin">—</span></div>
-    <div class="info-row"><span>Check-Out</span><span id="sucCheckout">—</span></div>
+  <div class="suc-icon">✓</div>
+  <div class="suc-title">Report Submitted!</div>
+  <div class="suc-sub">Your daily report has been saved.<br>Your manager can now view your data.</div>
+  <div class="card" style="text-align:left;margin-bottom:20px;">
+    <div class="sum-row"><span class="sl">Submitted By</span><span class="sv" id="sucName">—</span></div>
+    <div class="sum-row"><span class="sl">Date</span><span class="sv" id="sucDate">—</span></div>
+    <div class="sum-row"><span class="sl">Check-In</span><span class="sv" id="sucCin">—</span></div>
+    <div class="sum-row"><span class="sl">Check-Out</span><span class="sv" id="sucCout">—</span></div>
   </div>
-  <button class="new-entry-btn" onclick="resetForm()">＋ New Entry</button>
+  <button class="btn-new" onclick="location.reload()">＋ New Entry</button>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ============================================================
-// CONFIGURATION — Replace with your Google Apps Script URL
-// ============================================================
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzTNUai5tUTft3vMq7-aoJ_h16YTZAcKc7qL8RINNiLE-NICmHwtRWY2W3ObDuibloF0w/exec";
-// ============================================================
+let cur=0, s1="", s2="", stockB64="";
+let expFiles={}, expiredFiles={};
+let sCnt=0, eCnt=0, xCnt=0;
+let cinT="", coutT="";
+const labels=["Personal Information","Check-In","Stock Update","Expenses","Expired Products","Check-Out"];
+document.getElementById("reportDate").value=new Date().toISOString().split("T")[0];
 
-let currentPage = 0;
-const totalPages = 6;
-let checkinTimeVal = "";
-let checkoutTimeVal = "";
-let selfieBase64 = "";
-let selfieBase64_2 = "";
-let stockFileBase64 = "";
-let expenseFiles = {};
-let expiredFiles = {};
-
-// Set today's date
-document.getElementById("reportDate").value = new Date().toISOString().split("T")[0];
-
-// ---- NAVIGATION ----
-function nextPage(from) {
-  if (!validatePage(from)) return;
-  if (from === 1) {
-    const now = new Date();
-    checkinTimeVal = now.toLocaleTimeString();
-    document.getElementById("checkinTimeDisplay").textContent = checkinTimeVal;
-    document.getElementById("checkinTime").value = checkinTimeVal;
-  }
-  if (from === 4) {
-    updateSummary();
-    const now = new Date();
-    checkoutTimeVal = now.toLocaleTimeString();
-    document.getElementById("checkoutTimeDisplay").textContent = checkoutTimeVal;
-    document.getElementById("checkoutTime").value = checkoutTimeVal;
-  }
-  goToPage(from + 1);
+function nextPage(f){
+  if(!validate(f))return;
+  if(f===1){cinT=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit'});document.getElementById("cin_time").value=cinT;document.getElementById("cinTD").textContent=cinT;}
+  if(f===4)updateSum();
+  go(f+1);
 }
-
-function prevPage(from) { goToPage(from - 1); }
-
-function goToPage(n) {
-  document.getElementById("page" + currentPage).classList.remove("active");
-  document.getElementById("dot" + currentPage).classList.remove("active");
-  document.getElementById("dot" + currentPage).classList.add("done");
-  currentPage = n;
-  document.getElementById("page" + currentPage).classList.add("active");
-  document.getElementById("dot" + currentPage).classList.add("active");
-  window.scrollTo(0, 0);
-  const labels = ["Personal Info","Check-In","Stock Update","Expenses","Expired Products","Check-Out"];
-  document.getElementById("headerSub").textContent = labels[currentPage] || "Complete your daily report";
+function prevPage(f){go(f-1);}
+function go(n){
+  document.getElementById("page"+cur).classList.remove("active");
+  const p=document.getElementById("ps"+cur);p.classList.remove("active");p.classList.add("done");
+  cur=n;
+  document.getElementById("page"+cur).classList.add("active");
+  const c=document.getElementById("ps"+cur);c.classList.remove("done");c.classList.add("active");
+  document.getElementById("stepBadge").textContent=(cur+1)+" of 6";
+  document.getElementById("stepLabel").textContent=labels[cur];
+  window.scrollTo(0,0);
 }
-
-// ---- VALIDATION ----
-function validatePage(page) {
-  if (page === 0) {
-    if (!v("repName","Full Name is required")) return false;
-    if (!v("empId","Employee ID is required")) return false;
-    if (!v("phone","Phone number is required")) return false;
-    if (!v("storeName","Store name is required")) return false;
+function validate(p){
+  if(p===0){
+    if(!fv("repName","Please enter your full name"))return false;
+    if(!fv("empId","Please enter Employee ID"))return false;
+    if(!fv("phone","Please enter phone number"))return false;
+    if(!fv("storeName","Please enter store name"))return false;
   }
-  if (page === 1) {
-    if (!selfieBase64) { showToast("Please take a check-in selfie","error"); return false; }
-  }
+  if(p===1&&!s1){showToast("Please take a check-in selfie","error");return false;}
   return true;
 }
-function v(id, msg) {
-  const el = document.getElementById(id);
-  if (!el.value.trim()) { showToast(msg, "error"); el.focus(); return false; }
-  return true;
-}
+function fv(id,msg){const e=document.getElementById(id);if(!e.value.trim()){showToast(msg,"error");e.focus();return false;}return true;}
 
-// ---- SELFIE ----
-function handleSelfie(input) {
-  const file = input.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    selfieBase64 = e.target.result;
-    const img = document.getElementById("selfiePreview");
-    img.src = selfieBase64; img.style.display = "block";
-    document.getElementById("selfiePlaceholder").style.display = "none";
+function doSelfie(n,input){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    if(n===1)s1=e.target.result; else s2=e.target.result;
+    const img=document.getElementById("si"+n);
+    img.src=n===1?s1:s2; img.classList.add("show");
+    document.getElementById("sp"+n).style.display="none";
+    document.getElementById("sa"+n).classList.add("has-photo");
   };
-  reader.readAsDataURL(file);
+  r.readAsDataURL(f);
 }
-function handleSelfie2(input) {
-  const file = input.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    selfieBase64_2 = e.target.result;
-    const img = document.getElementById("selfiePreview2");
-    img.src = selfieBase64_2; img.style.display = "block";
-    document.getElementById("selfiePlaceholder2").style.display = "none";
+
+function doGPS(n){
+  const dot=document.getElementById("gd"+n),txt=document.getElementById("gt"+n),chip=document.getElementById("gc"+n);
+  dot.className="gps-dot on"; txt.textContent="Getting location...";
+  if(!navigator.geolocation){txt.textContent="GPS not supported";dot.className="gps-dot err";return;}
+  navigator.geolocation.getCurrentPosition(pos=>{
+    const la=pos.coords.latitude.toFixed(5),lo=pos.coords.longitude.toFixed(5);
+    document.getElementById(n===1?"cin_lat":"cout_lat").value=la;
+    document.getElementById(n===1?"cin_lng":"cout_lng").value=lo;
+    txt.textContent="📍 "+la+", "+lo; chip.classList.add("ok");
+    showToast("Location captured ✓","success");
+  },()=>{dot.className="gps-dot err";txt.textContent="Could not get location";},{enableHighAccuracy:true,timeout:10000});
+}
+
+function doUpload(input,prevId){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    if(input.id==="stockFile")stockB64=e.target.result;
+    if(f.type.startsWith("image/")){const img=document.getElementById(prevId);if(img){img.src=e.target.result;img.classList.add("show");}}
   };
-  reader.readAsDataURL(file);
+  r.readAsDataURL(f);
 }
 
-// ---- FILE PREVIEW ----
-function handleFilePreview(input, previewId, boxId) {
-  const file = input.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    const inputId = input.id;
-    if (inputId === "stockFile") stockFileBase64 = e.target.result;
-    if (file.type.startsWith("image/")) {
-      const img = document.getElementById(previewId);
-      if (img) { img.src = e.target.result; img.style.display = "block"; }
-    }
+function addStock(){
+  sCnt++;const n=sCnt;
+  const d=document.createElement("div");d.className="repeat-item";d.id="si_"+n;
+  d.innerHTML=`<div class="ri-header"><div class="ri-title">📦 Product ${n}</div><button class="btn-rem" onclick="rem('si_${n}')">×</button></div>
+    <div class="field"><div class="field-label">Product Name</div><input type="text" id="sn_${n}" placeholder="e.g. Colgate 200g"/></div>
+    <div class="field"><div class="field-label">Category</div><select id="sc_${n}"><option>Food & Beverages</option><option>Personal Care</option><option>Household</option><option>Electronics</option><option>Other</option></select></div>
+    <div class="two-col"><div class="field"><div class="field-label">Opening Stock</div><input type="number" id="so_${n}" placeholder="0"/></div><div class="field"><div class="field-label">Closing Stock</div><input type="number" id="scl_${n}" placeholder="0"/></div></div>
+    <div class="field"><div class="field-label">Units Sold</div><input type="number" id="ss_${n}" placeholder="0"/></div>`;
+  document.getElementById("stockItems").appendChild(d);
+}
+
+function addExp(){
+  eCnt++;const n=eCnt;
+  const d=document.createElement("div");d.className="repeat-item";d.id="ex_"+n;
+  d.innerHTML=`<div class="ri-header"><div class="ri-title">🧾 Expense ${n}</div><button class="btn-rem" onclick="rem('ex_${n}')">×</button></div>
+    <div class="field"><div class="field-label">Expense Type</div><select id="et_${n}"><option>Travel</option><option>Food</option><option>Accommodation</option><option>Communication</option><option>Other</option></select></div>
+    <div class="two-col"><div class="field"><div class="field-label">Amount (₹)</div><input type="number" id="ea_${n}" placeholder="0"/></div><div class="field"><div class="field-label">Description</div><input type="text" id="ed_${n}" placeholder="Details"/></div></div>
+    <div class="field"><div class="field-label">Receipt Photo</div><div class="upload-box" style="padding:14px;"><input type="file" accept="image/*" id="er_${n}" onchange="doExpFile(this,${n})"/><div class="ui" style="font-size:26px;">🧾</div><div class="ut" style="font-size:13px;">Upload Receipt</div><img class="preview" id="ep_${n}" alt=""/></div></div>`;
+  document.getElementById("expItems").appendChild(d);
+}
+function doExpFile(input,n){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{expFiles[n]=e.target.result;const img=document.getElementById("ep_"+n);if(img&&f.type.startsWith("image/")){img.src=e.target.result;img.classList.add("show");}};r.readAsDataURL(f);}
+
+function addExpired(){
+  xCnt++;const n=xCnt;
+  const d=document.createElement("div");d.className="repeat-item";d.id="xp_"+n;d.style.borderColor="#FCA5A5";
+  d.innerHTML=`<div class="ri-header"><div class="ri-title">⚠️ Expired Product ${n}</div><button class="btn-rem" onclick="rem('xp_${n}')">×</button></div>
+    <div class="field"><div class="field-label">Product Name</div><input type="text" id="xn_${n}" placeholder="Product name"/></div>
+    <div class="two-col"><div class="field"><div class="field-label">Expiry Date</div><input type="date" id="xd_${n}"/></div><div class="field"><div class="field-label">Quantity</div><input type="number" id="xq_${n}" placeholder="0"/></div></div>
+    <div class="field"><div class="field-label">Action Taken</div><select id="xa_${n}"><option>Removed from shelf</option><option>Reported to manager</option><option>Returned to supplier</option><option>Pending action</option></select></div>
+    <div class="field"><div class="field-label">Photo of Expired Product</div><div class="upload-box" style="padding:14px;border-color:#FCA5A5;"><input type="file" accept="image/*" capture="environment" id="xf_${n}" onchange="doExpiredFile(this,${n})"/><div class="ui" style="font-size:26px;">📸</div><div class="ut" style="font-size:13px;">Take Photo</div><img class="preview" id="xfp_${n}" alt=""/></div></div>`;
+  document.getElementById("expiredItems").appendChild(d);
+}
+function doExpiredFile(input,n){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{expiredFiles[n]=e.target.result;const img=document.getElementById("xfp_"+n);if(img&&f.type.startsWith("image/")){img.src=e.target.result;img.classList.add("show");}};r.readAsDataURL(f);}
+
+function rem(id){const e=document.getElementById(id);if(e)e.remove();}
+
+function updateSum(){
+  document.getElementById("sName").textContent=document.getElementById("repName").value||"—";
+  document.getElementById("sEmpId").textContent=document.getElementById("empId").value||"—";
+  document.getElementById("sStore").textContent=document.getElementById("storeName").value||"—";
+  document.getElementById("sCin").textContent=cinT||"—";
+  document.getElementById("sStock").textContent=document.getElementById("stockItems").children.length+" items";
+  document.getElementById("sExp").textContent=document.getElementById("expItems").children.length+" entries";
+  document.getElementById("sExpired").textContent=document.getElementById("expiredItems").children.length+" items";
+}
+
+function colStock(){const a=[];for(let i=1;i<=sCnt;i++){if(!document.getElementById("sn_"+i))continue;a.push({name:document.getElementById("sn_"+i).value,category:document.getElementById("sc_"+i).value,opening:document.getElementById("so_"+i).value,closing:document.getElementById("scl_"+i).value,sold:document.getElementById("ss_"+i).value});}return a;}
+function colExp(){const a=[];for(let i=1;i<=eCnt;i++){if(!document.getElementById("et_"+i))continue;a.push({type:document.getElementById("et_"+i).value,amount:document.getElementById("ea_"+i).value,description:document.getElementById("ed_"+i).value,receipt:expFiles[i]||""});}return a;}
+function colExpired(){const a=[];for(let i=1;i<=xCnt;i++){if(!document.getElementById("xn_"+i))continue;a.push({name:document.getElementById("xn_"+i).value,date:document.getElementById("xd_"+i).value,qty:document.getElementById("xq_"+i).value,action:document.getElementById("xa_"+i).value,photo:expiredFiles[i]||""});}return a;}
+
+async function submitForm(){
+  const btn=document.getElementById("subBtn");
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Submitting...';
+  coutT=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  document.getElementById("coutTD").textContent=coutT;
+  const payload={
+    repName:document.getElementById("repName").value, empId:document.getElementById("empId").value,
+    phone:document.getElementById("phone").value, storeName:document.getElementById("storeName").value,
+    region:document.getElementById("region").value, reportDate:document.getElementById("reportDate").value,
+    checkinSelfie:s1, checkinTime:cinT,
+    checkinLat:document.getElementById("cin_lat").value, checkinLng:document.getElementById("cin_lng").value,
+    checkinNotes:document.getElementById("cinNotes").value,
+    stockItems:colStock(), stockSheetFile:stockB64,
+    expenseItems:colExp(), expiredItems:colExpired(),
+    checkoutSelfie:s2, checkoutTime:coutT,
+    checkoutLat:document.getElementById("cout_lat").value, checkoutLng:document.getElementById("cout_lng").value,
+    daySummary:document.getElementById("daySummary").value,
+    submittedAt:new Date().toISOString()
   };
-  reader.readAsDataURL(file);
-}
-
-// ---- GPS ----
-function getLocation(type) {
-  const dotId = type === "checkin" ? "checkinGpsDot" : "checkoutGpsDot";
-  const textId = type === "checkin" ? "checkinGpsText" : "checkoutGpsText";
-  document.getElementById(dotId).className = "gps-dot active";
-  document.getElementById(textId).textContent = "Getting location...";
-  if (!navigator.geolocation) {
-    document.getElementById(textId).textContent = "GPS not supported";
-    document.getElementById(dotId).className = "gps-dot error";
-    return;
-  }
-  navigator.geolocation.getCurrentPosition(pos => {
-    const lat = pos.coords.latitude.toFixed(6);
-    const lng = pos.coords.longitude.toFixed(6);
-    document.getElementById(type + "Lat").value = lat;
-    document.getElementById(type + "Lng").value = lng;
-    document.getElementById(dotId).className = "gps-dot active";
-    document.getElementById(textId).textContent = `${lat}, ${lng}`;
-    showToast("Location captured ✓", "success");
-  }, err => {
-    document.getElementById(dotId).className = "gps-dot error";
-    document.getElementById(textId).textContent = "Location unavailable";
-  }, { enableHighAccuracy: true, timeout: 10000 });
-}
-
-// ---- STOCK ITEMS ----
-let stockCount = 0;
-function addStockItem() {
-  stockCount++;
-  const id = "stock_" + stockCount;
-  const div = document.createElement("div");
-  div.className = "repeat-item"; div.id = id;
-  div.innerHTML = `
-    <button class="remove-btn" onclick="removeItem('${id}')">×</button>
-    <div class="field"><label>Product Name</label>
-      <input type="text" placeholder="e.g. Product A" id="sname_${stockCount}" /></div>
-    <div class="field"><label>Category</label>
-      <select id="scat_${stockCount}">
-        <option>Food & Beverages</option><option>Personal Care</option>
-        <option>Household</option><option>Electronics</option><option>Other</option>
-      </select></div>
-    <div style="display:flex;gap:10px;">
-      <div class="field" style="flex:1"><label>Opening Stock</label>
-        <input type="number" placeholder="0" id="sopen_${stockCount}" /></div>
-      <div class="field" style="flex:1"><label>Closing Stock</label>
-        <input type="number" placeholder="0" id="sclose_${stockCount}" /></div>
-    </div>
-    <div class="field"><label>Units Sold</label>
-      <input type="number" placeholder="0" id="ssold_${stockCount}" /></div>
-  `;
-  document.getElementById("stockItems").appendChild(div);
-}
-
-// ---- EXPENSE ITEMS ----
-let expCount = 0;
-function addExpenseItem() {
-  expCount++;
-  const id = "exp_" + expCount;
-  const div = document.createElement("div");
-  div.className = "repeat-item card"; div.id = id;
-  div.innerHTML = `
-    <button class="remove-btn" onclick="removeItem('${id}')">×</button>
-    <div class="field"><label>Expense Type</label>
-      <select id="etype_${expCount}">
-        <option>Travel</option><option>Food</option><option>Accommodation</option>
-        <option>Communication</option><option>Other</option>
-      </select></div>
-    <div class="field"><label>Amount (₹)</label>
-      <input type="number" placeholder="0.00" id="eamt_${expCount}" /></div>
-    <div class="field"><label>Description</label>
-      <input type="text" placeholder="Brief description" id="edesc_${expCount}" /></div>
-    <div class="field"><label>Receipt Photo</label>
-      <div class="photo-upload">
-        <input type="file" accept="image/*" id="ereceipt_${expCount}"
-          onchange="handleExpenseFile(this,${expCount})" />
-        <div class="icon">🧾</div><p>Upload receipt photo</p>
-        <img class="preview" id="epreview_${expCount}" alt="receipt"/>
-      </div></div>
-  `;
-  document.getElementById("expenseItems").appendChild(div);
-}
-function handleExpenseFile(input, n) {
-  const file = input.files[0]; if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    expenseFiles[n] = e.target.result;
-    const img = document.getElementById("epreview_" + n);
-    if (img && file.type.startsWith("image/")) { img.src = e.target.result; img.style.display = "block"; }
-  };
-  reader.readAsDataURL(file);
-}
-
-// ---- EXPIRED ITEMS ----
-let expiredCount = 0;
-function addExpiredItem() {
-  expiredCount++;
-  const id = "expired_" + expiredCount;
-  const div = document.createElement("div");
-  div.className = "repeat-item card"; div.id = id;
-  div.innerHTML = `
-    <button class="remove-btn" onclick="removeItem('${id}')">×</button>
-    <div class="field"><label>Product Name</label>
-      <input type="text" placeholder="Product name" id="epname_${expiredCount}" /></div>
-    <div style="display:flex;gap:10px;">
-      <div class="field" style="flex:1"><label>Expiry Date</label>
-        <input type="date" id="epdate_${expiredCount}" /></div>
-      <div class="field" style="flex:1"><label>Quantity</label>
-        <input type="number" placeholder="0" id="epqty_${expiredCount}" /></div>
-    </div>
-    <div class="field"><label>Action Taken</label>
-      <select id="epaction_${expiredCount}">
-        <option>Removed from shelf</option><option>Reported to manager</option>
-        <option>Returned to supplier</option><option>Pending action</option>
-      </select></div>
-    <div class="field"><label>Photo of Expired Product</label>
-      <div class="photo-upload">
-        <input type="file" accept="image/*" capture="environment" id="epphoto_${expiredCount}"
-          onchange="handleExpiredFile(this,${expiredCount})" />
-        <div class="icon">📸</div><p>Take photo of expired product</p>
-        <img class="preview" id="eppreview_${expiredCount}" alt="expired"/>
-      </div></div>
-  `;
-  document.getElementById("expiredItems").appendChild(div);
-}
-function handleExpiredFile(input, n) {
-  const file = input.files[0]; if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    expiredFiles[n] = e.target.result;
-    const img = document.getElementById("eppreview_" + n);
-    if (img && file.type.startsWith("image/")) { img.src = e.target.result; img.style.display = "block"; }
-  };
-  reader.readAsDataURL(file);
-}
-
-function removeItem(id) { const el = document.getElementById(id); if (el) el.remove(); }
-
-// ---- SUMMARY ----
-function updateSummary() {
-  document.getElementById("sumName").textContent = document.getElementById("repName").value || "—";
-  document.getElementById("sumEmpId").textContent = document.getElementById("empId").value || "—";
-  document.getElementById("sumStore").textContent = document.getElementById("storeName").value || "—";
-  document.getElementById("sumCheckin").textContent = checkinTimeVal || "—";
-  document.getElementById("sumStock").textContent = document.getElementById("stockItems").children.length + " items";
-  document.getElementById("sumExpenses").textContent = document.getElementById("expenseItems").children.length + " entries";
-  document.getElementById("sumExpired").textContent = document.getElementById("expiredItems").children.length + " items";
-}
-
-// ---- COLLECT DATA ----
-function collectStockData() {
-  const items = [];
-  for (let i = 1; i <= stockCount; i++) {
-    if (!document.getElementById("sname_" + i)) continue;
-    items.push({
-      name: document.getElementById("sname_" + i).value,
-      category: document.getElementById("scat_" + i).value,
-      opening: document.getElementById("sopen_" + i).value,
-      closing: document.getElementById("sclose_" + i).value,
-      sold: document.getElementById("ssold_" + i).value,
-    });
-  }
-  return items;
-}
-
-function collectExpenseData() {
-  const items = [];
-  for (let i = 1; i <= expCount; i++) {
-    if (!document.getElementById("etype_" + i)) continue;
-    items.push({
-      type: document.getElementById("etype_" + i).value,
-      amount: document.getElementById("eamt_" + i).value,
-      description: document.getElementById("edesc_" + i).value,
-      receiptPhoto: expenseFiles[i] || ""
-    });
-  }
-  return items;
-}
-
-function collectExpiredData() {
-  const items = [];
-  for (let i = 1; i <= expiredCount; i++) {
-    if (!document.getElementById("epname_" + i)) continue;
-    items.push({
-      name: document.getElementById("epname_" + i).value,
-      expiryDate: document.getElementById("epdate_" + i).value,
-      quantity: document.getElementById("epqty_" + i).value,
-      action: document.getElementById("epaction_" + i).value,
-      photo: expiredFiles[i] || ""
-    });
-  }
-  return items;
-}
-
-// ---- SUBMIT ----
-async function submitForm() {
-  const btn = document.getElementById("submitBtn");
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>Submitting...';
-
-  const checkoutNow = new Date();
-  checkoutTimeVal = checkoutNow.toLocaleTimeString();
-  document.getElementById("checkoutTimeDisplay").textContent = checkoutTimeVal;
-
-  const payload = {
-    // Personal Info
-    repName: document.getElementById("repName").value,
-    empId: document.getElementById("empId").value,
-    phone: document.getElementById("phone").value,
-    storeName: document.getElementById("storeName").value,
-    region: document.getElementById("region").value,
-    reportDate: document.getElementById("reportDate").value,
-    // Check-In
-    checkinSelfie: selfieBase64,
-    checkinTime: checkinTimeVal,
-    checkinLat: document.getElementById("checkinLat").value,
-    checkinLng: document.getElementById("checkinLng").value,
-    checkinNotes: document.getElementById("checkinNotes").value,
-    // Stock
-    stockItems: collectStockData(),
-    stockSheetFile: stockFileBase64,
-    // Expenses
-    expenseItems: collectExpenseData(),
-    // Expired
-    expiredItems: collectExpiredData(),
-    // Check-Out
-    checkoutSelfie: selfieBase64_2,
-    checkoutTime: checkoutTimeVal,
-    checkoutLat: document.getElementById("checkoutLat").value,
-    checkoutLng: document.getElementById("checkoutLng").value,
-    daySummary: document.getElementById("daySummary").value,
-    submittedAt: new Date().toISOString()
-  };
-
-  try {
-    if (SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE") {
-      // Demo mode — show success without actual submission
-      await new Promise(r => setTimeout(r, 1500));
-      showSuccess(payload);
-      return;
-    }
-    await fetch(SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "text/plain" },
-      body: JSON.stringify(payload)
-    });
-    // no-cors won't return readable response, so we assume success
-    showSuccess(payload);
-  } catch (err) {
-    btn.disabled = false;
-    btn.innerHTML = "✅ Submit Daily Report";
-    showToast("Submission failed. Please try again.", "error");
-    console.error(err);
+  try{
+    await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify(payload)});
+    for(let i=0;i<6;i++){const e=document.getElementById("page"+i);if(e)e.style.display="none";}
+    document.querySelector(".header").style.display="none";
+    const s=document.getElementById("successScreen");s.style.display="block";
+    document.getElementById("sucName").textContent=payload.repName;
+    document.getElementById("sucDate").textContent=payload.reportDate;
+    document.getElementById("sucCin").textContent=payload.checkinTime||"—";
+    document.getElementById("sucCout").textContent=payload.checkoutTime||"—";
+  }catch(err){
+    btn.disabled=false; btn.innerHTML="✅ Submit Report";
+    showToast("Submission failed. Please try again.","error");
   }
 }
 
-function showSuccess(payload) {
-  document.getElementById("page5").style.display = "none";
-  document.getElementById("stepsBar").style.display = "none";
-  const s = document.getElementById("successScreen");
-  s.style.display = "block";
-  document.getElementById("sucName").textContent = payload.repName;
-  document.getElementById("sucDate").textContent = payload.reportDate;
-  document.getElementById("sucCheckin").textContent = payload.checkinTime || "—";
-  document.getElementById("sucCheckout").textContent = payload.checkoutTime || "—";
-}
-
-function resetForm() {
-  location.reload();
-}
-
-// ---- TOAST ----
-function showToast(msg, type = "") {
-  const t = document.getElementById("toast");
-  t.textContent = msg;
-  t.className = "toast show " + type;
-  setTimeout(() => { t.className = "toast"; }, 3000);
+function showToast(msg,type=""){
+  const t=document.getElementById("toast");t.textContent=msg;t.className="toast show "+type;
+  setTimeout(()=>{t.className="toast";},3000);
 }
 </script>
 
