@@ -7,67 +7,55 @@
 <title>Field Rep Portal</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-:root {
-  --bg: #0d0f14;
-  --card: #161920;
-  --card2: #1e2230;
-  --accent: #00e5a0;
-  --accent2: #0084ff;
-  --warn: #ff6b35;
-  --text: #f0f2f7;
-  --muted: #6b7280;
-  --border: #2a2f3d;
-  --radius: 16px;
-  --success: #00c97a;
-  --danger: #ef4444;
-}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow-x:hidden;}
-body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;padding-bottom:110px;}
+body{background:#0d0f14;color:#f0f2f7;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;padding-bottom:110px;}
 
 /* HEADER */
-.hdr{background:linear-gradient(135deg,#0d1a2a 0%,#0d0f14 100%);border-bottom:1px solid var(–border);padding:50px 20px 0;position:sticky;top:0;z-index:100;}
-.hdr-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-.hdr-title{font-size:22px;font-weight:800;letter-spacing:-0.5px;background:linear-gradient(90deg,var(–accent),var(–accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.hdr-badge{background:rgba(0,229,160,0.15);border:1px solid var(–accent);color:var(–accent);font-size:12px;font-weight:700;padding:5px 14px;border-radius:20px;}
+.hdr{background:linear-gradient(135deg,#0d1a2a 0%,#0d0f14 100%);border-bottom:1px solid #2a2f3d;padding:48px 20px 0;position:sticky;top:0;z-index:100;}
+.hdr-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.hdr-title{font-size:24px;font-weight:800;letter-spacing:-0.5px;background:linear-gradient(90deg,#00e5a0,#0084ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hdr-badge{background:rgba(0,229,160,0.15);border:1.5px solid #00e5a0;color:#00e5a0;font-size:13px;font-weight:700;padding:6px 16px;border-radius:20px;}
 .prog{display:flex;gap:5px;margin-bottom:10px;}
-.prog-dot{flex:1;height:5px;border-radius:5px;background:var(–border);transition:background 0.3s;}
-.prog-dot.done{background:var(–accent2);opacity:0.5;}
-.prog-dot.active{background:var(–accent);}
-.prog-lbl{font-size:13px;font-weight:600;color:var(–muted);padding-bottom:14px;}
+.prog-dot{flex:1;height:5px;border-radius:5px;background:#2a2f3d;transition:background 0.3s;}
+.prog-dot.done{background:#0084ff;opacity:0.5;}
+.prog-dot.active{background:#00e5a0;}
+.prog-lbl{font-size:13px;font-weight:600;color:#6b7280;padding-bottom:14px;}
 
 /* PAGES */
 .page{display:none;}
 .page.active{display:block;animation:up 0.25s ease;}
-@keyframes up{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+@keyframes up{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 
 /* HERO */
-.hero{margin:16px 16px 0;background:var(–card);border:1px solid var(–border);border-radius:var(–radius);padding:20px;display:flex;align-items:center;gap:16px;}
-.hero-ico{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;}
+.hero{margin:16px 16px 0;background:#161920;border:1px solid #2a2f3d;border-radius:18px;padding:20px;display:flex;align-items:center;gap:16px;}
+.hero-ico{width:58px;height:58px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;}
 .hero-ttl{font-size:22px;font-weight:800;color:#fff;}
-.hero-sub{font-size:14px;color:var(–muted);margin-top:3px;}
+.hero-sub{font-size:14px;color:#6b7280;margin-top:4px;}
 
-/* CARDS */
-.card{background:var(–card);border:1px solid var(–border);border-radius:var(–radius);padding:20px;margin:12px 16px 0;}
-.c-ttl{font-size:13px;font-weight:700;color:var(–muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:16px;}
+/* CARD */
+.card{background:#161920;border:1px solid #2a2f3d;border-radius:18px;padding:22px;margin:14px 16px 0;}
+.c-ttl{font-size:13px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:18px;}
 
-/* FIELDS — BIGGER */
-.field{margin-bottom:20px;}
+/* FIELDS */
+.field{margin-bottom:22px;}
 .field:last-child{margin-bottom:0;}
-.f-lbl{font-size:16px;font-weight:700;color:var(–text);margin-bottom:10px;}
-.req{color:var(–danger);}
+.f-lbl{font-size:17px;font-weight:700;color:#f0f2f7;margin-bottom:10px;}
+.req{color:#ef4444;}
 
+/* INPUTS — FULL WIDTH BIG */
 input[type=“text”],
 input[type=“number”],
 input[type=“tel”],
 input[type=“date”],
 select,
-textarea {
+textarea{
+display:block;
 width:100%;
-background:var(–card2);
-border:2px solid var(–border);
+background:#1e2230;
+border:2px solid #2a2f3d;
 border-radius:14px;
-color:#fff;
+color:#ffffff;
 font-family:‘Plus Jakarta Sans’,sans-serif;
 font-size:18px;
 font-weight:500;
@@ -76,92 +64,92 @@ outline:none;
 transition:border-color 0.2s,box-shadow 0.2s;
 -webkit-appearance:none;
 appearance:none;
-caret-color:var(–accent);
+caret-color:#00e5a0;
 }
-input::placeholder,textarea::placeholder{color:var(–muted);}
-input:focus,select:focus,textarea:focus{border-color:var(–accent);box-shadow:0 0 0 3px rgba(0,229,160,0.15);}
+input::placeholder,textarea::placeholder{color:#4b5563;}
+input:focus,select:focus,textarea:focus{border-color:#00e5a0;box-shadow:0 0 0 3px rgba(0,229,160,0.15);}
 textarea{resize:none;min-height:100px;line-height:1.6;}
-select{background-image:url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘18’ height=‘18’ viewBox=‘0 0 24 24’ fill=‘none’ stroke=’%236b7280’ stroke-width=‘2.5’%3E%3Cpath d=‘M6 9l6 6 6-6’/%3E%3C/svg%3E”);background-repeat:no-repeat;background-position:right 18px center;padding-right:50px;}
-select option{background:var(–card2);color:#fff;}
+select{background-image:url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘20’ height=‘20’ viewBox=‘0 0 24 24’ fill=‘none’ stroke=’%236b7280’ stroke-width=‘2.5’%3E%3Cpath d=‘M6 9l6 6 6-6’/%3E%3C/svg%3E”);background-repeat:no-repeat;background-position:right 18px center;padding-right:52px;}
+select option{background:#1e2230;color:#fff;}
 
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 
 /* SELFIE */
-.selfie-box{background:var(–card2);border:2px dashed var(–border);border-radius:16px;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;transition:border-color 0.2s;}
-.selfie-box.ok{border-style:solid;border-color:var(–accent);}
+.selfie-box{background:#1e2230;border:2px dashed #2a2f3d;border-radius:16px;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;transition:border-color 0.2s;}
+.selfie-box.ok{border-style:solid;border-color:#00e5a0;}
 .selfie-box img{width:100%;height:240px;object-fit:cover;display:none;}
 .selfie-box img.show{display:block;}
-.s-ph{text-align:center;padding:28px;}
-.s-ph .ico{font-size:54px;margin-bottom:12px;}
-.s-ph p{font-size:15px;color:var(–muted);line-height:1.5;}
-.s-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
-.btn-cam{background:var(–accent);color:#0d0f14;border:none;border-radius:14px;padding:16px;font-size:16px;font-weight:800;cursor:pointer;font-family:‘Plus Jakarta Sans’,sans-serif;}
-.btn-gal{background:rgba(0,229,160,0.1);color:var(–accent);border:2px solid var(–accent);border-radius:14px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;font-family:‘Plus Jakarta Sans’,sans-serif;}
+.s-ph{text-align:center;padding:30px;}
+.s-ph .ico{font-size:56px;margin-bottom:12px;}
+.s-ph p{font-size:15px;color:#6b7280;line-height:1.6;}
+.s-btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;}
+.btn-cam{background:#00e5a0;color:#0d0f14;border:none;border-radius:14px;padding:17px;font-size:16px;font-weight:800;cursor:pointer;font-family:‘Plus Jakarta Sans’,sans-serif;}
+.btn-gal{background:rgba(0,229,160,0.1);color:#00e5a0;border:2px solid #00e5a0;border-radius:14px;padding:17px;font-size:16px;font-weight:700;cursor:pointer;font-family:‘Plus Jakarta Sans’,sans-serif;}
 
 /* TIME CHIP */
-.t-chip{background:rgba(0,229,160,0.08);border:1px solid rgba(0,229,160,0.25);border-radius:14px;padding:18px;display:flex;align-items:center;gap:16px;}
+.t-chip{background:rgba(0,229,160,0.08);border:1.5px solid rgba(0,229,160,0.25);border-radius:14px;padding:18px;display:flex;align-items:center;gap:16px;}
 .t-ico{font-size:32px;}
-.t-val{font-size:22px;font-weight:800;color:var(–accent);}
-.t-sub{font-size:13px;color:var(–muted);margin-top:3px;}
+.t-val{font-size:22px;font-weight:800;color:#00e5a0;}
+.t-sub{font-size:13px;color:#6b7280;margin-top:3px;}
 
 /* GPS */
-.gps-row{background:var(–card2);border:2px solid var(–border);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:12px;}
-.gps-row.ok{border-color:var(–accent);background:rgba(0,229,160,0.06);}
-.g-dot{width:12px;height:12px;border-radius:50%;background:var(–muted);flex-shrink:0;}
-.g-dot.on{background:var(–accent);box-shadow:0 0 0 3px rgba(0,229,160,0.2);animation:blink 1.5s infinite;}
-.g-dot.err{background:var(–danger);}
+.gps-row{background:#1e2230;border:2px solid #2a2f3d;border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:12px;}
+.gps-row.ok{border-color:#00e5a0;background:rgba(0,229,160,0.06);}
+.g-dot{width:12px;height:12px;border-radius:50%;background:#4b5563;flex-shrink:0;}
+.g-dot.on{background:#00e5a0;box-shadow:0 0 0 4px rgba(0,229,160,0.2);animation:blink 1.5s infinite;}
+.g-dot.err{background:#ef4444;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
-.g-txt{font-size:14px;color:var(–muted);flex:1;font-weight:500;word-break:break-all;}
-.btn-loc{background:var(–accent);color:#0d0f14;border:none;border-radius:12px;padding:12px 18px;font-size:14px;font-weight:800;cursor:pointer;font-family:‘Plus Jakarta Sans’,sans-serif;white-space:nowrap;flex-shrink:0;}
+.g-txt{font-size:15px;color:#6b7280;flex:1;font-weight:500;word-break:break-all;}
+.btn-loc{background:#00e5a0;color:#0d0f14;border:none;border-radius:12px;padding:13px 20px;font-size:14px;font-weight:800;cursor:pointer;font-family:‘Plus Jakarta Sans’,sans-serif;white-space:nowrap;flex-shrink:0;}
 
 /* UPLOAD */
-.upload-box{background:var(–card2);border:2px dashed var(–border);border-radius:16px;padding:26px;text-align:center;cursor:pointer;position:relative;overflow:hidden;transition:all 0.2s;}
-.upload-box:hover{border-color:var(–accent);}
+.upload-box{background:#1e2230;border:2px dashed #2a2f3d;border-radius:16px;padding:28px;text-align:center;cursor:pointer;position:relative;overflow:hidden;transition:all 0.2s;}
+.upload-box:hover{border-color:#00e5a0;}
 .upload-box input[type=“file”]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.upload-box .u-ico{font-size:38px;margin-bottom:10px;}
-.upload-box .u-ttl{font-size:16px;font-weight:700;color:var(–text);margin-bottom:4px;}
-.upload-box .u-sub{font-size:13px;color:var(–muted);}
+.u-ico{font-size:40px;margin-bottom:10px;}
+.u-ttl{font-size:16px;font-weight:700;color:#f0f2f7;margin-bottom:5px;}
+.u-sub{font-size:13px;color:#6b7280;}
 .upload-box img.preview{width:100%;max-height:160px;object-fit:cover;border-radius:10px;margin-top:14px;display:none;}
 .upload-box img.show{display:block;}
 
 /* REPEAT ITEM */
-.r-item{background:var(–card2);border:1.5px solid var(–border);border-radius:16px;padding:18px;margin-bottom:12px;}
-.r-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.r-item{background:#1e2230;border:1.5px solid #2a2f3d;border-radius:16px;padding:18px;margin-bottom:14px;}
+.r-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
 .r-ttl{font-size:16px;font-weight:700;color:#fff;}
-.btn-rem{background:rgba(239,68,68,0.15);border:none;color:var(–danger);border-radius:10px;width:34px;height:34px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.btn-rem{background:rgba(239,68,68,0.15);border:none;color:#ef4444;border-radius:10px;width:36px;height:36px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
 
 /* ADD BTN */
-.btn-add{width:100%;background:rgba(0,229,160,0.08);border:2px dashed var(–accent);color:var(–accent);border-radius:14px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;font-family:‘Plus Jakarta Sans’,sans-serif;margin-top:6px;}
+.btn-add{width:100%;background:rgba(0,229,160,0.08);border:2px dashed #00e5a0;color:#00e5a0;border-radius:14px;padding:17px;font-size:16px;font-weight:700;cursor:pointer;font-family:‘Plus Jakarta Sans’,sans-serif;margin-top:6px;}
 
 /* BOTTOM NAV */
-.nav-fixed{position:fixed;bottom:0;left:0;right:0;background:var(–card);border-top:1px solid var(–border);padding:14px 16px 32px;display:flex;gap:10px;z-index:200;}
-.btn-back{flex:1;background:var(–card2);border:1.5px solid var(–border);color:var(–text);border-radius:14px;padding:16px;font-size:16px;font-weight:600;cursor:pointer;font-family:‘Plus Jakarta Sans’,sans-serif;}
-.btn-next{flex:2;background:linear-gradient(135deg,var(–accent),#00b87a);color:#0d0f14;border:none;border-radius:14px;padding:16px;font-size:16px;font-weight:800;cursor:pointer;font-family:‘Plus Jakarta Sans’,sans-serif;box-shadow:0 4px 16px rgba(0,229,160,0.3);}
-.btn-submit{width:100%;background:linear-gradient(135deg,var(–accent),var(–accent2));color:#fff;border:none;border-radius:14px;padding:18px;font-size:17px;font-weight:800;cursor:pointer;font-family:‘Plus Jakarta Sans’,sans-serif;box-shadow:0 4px 20px rgba(0,229,160,0.3);display:flex;align-items:center;justify-content:center;gap:8px;}
+.nav-fixed{position:fixed;bottom:0;left:0;right:0;background:#161920;border-top:1px solid #2a2f3d;padding:14px 16px 34px;display:flex;gap:12px;z-index:200;}
+.btn-back{flex:1;background:#1e2230;border:1.5px solid #2a2f3d;color:#f0f2f7;border-radius:14px;padding:17px;font-size:17px;font-weight:600;cursor:pointer;font-family:‘Plus Jakarta Sans’,sans-serif;}
+.btn-next{flex:2;background:linear-gradient(135deg,#00e5a0,#00b87a);color:#0d0f14;border:none;border-radius:14px;padding:17px;font-size:17px;font-weight:800;cursor:pointer;font-family:‘Plus Jakarta Sans’,sans-serif;box-shadow:0 4px 20px rgba(0,229,160,0.35);}
+.btn-submit{width:100%;background:linear-gradient(135deg,#00e5a0,#0084ff);color:#fff;border:none;border-radius:14px;padding:18px;font-size:17px;font-weight:800;cursor:pointer;font-family:‘Plus Jakarta Sans’,sans-serif;box-shadow:0 4px 20px rgba(0,229,160,0.3);display:flex;align-items:center;justify-content:center;gap:8px;}
 .btn-submit:disabled{opacity:0.6;}
 
 /* SUMMARY */
-.sum-row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(–border);font-size:15px;}
+.sum-row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid #2a2f3d;font-size:15px;}
 .sum-row:last-child{border-bottom:none;}
-.sl{color:var(–muted);font-weight:500;}
+.sl{color:#6b7280;font-weight:500;}
 .sv{font-weight:700;color:#fff;text-align:right;max-width:55%;}
 
 /* SUCCESS */
 #successScreen{display:none;padding:52px 20px;text-align:center;}
-.suc-ico{width:90px;height:90px;border-radius:50%;background:rgba(0,229,160,0.1);border:2px solid var(–accent);display:flex;align-items:center;justify-content:center;font-size:42px;margin:0 auto 24px;animation:pop 0.4s cubic-bezier(0.175,0.885,0.32,1.275);}
+.suc-ico{width:90px;height:90px;border-radius:50%;background:rgba(0,229,160,0.1);border:2px solid #00e5a0;display:flex;align-items:center;justify-content:center;font-size:42px;margin:0 auto 24px;animation:pop 0.4s cubic-bezier(0.175,0.885,0.32,1.275);}
 @keyframes pop{from{transform:scale(0);}to{transform:scale(1);}}
 .suc-ttl{font-size:28px;font-weight:800;color:#fff;margin-bottom:10px;}
-.suc-sub{font-size:15px;color:var(–muted);line-height:1.6;margin-bottom:28px;}
-.btn-new{background:var(–card2);border:1px solid var(–border);color:var(–text);border-radius:14px;padding:16px 32px;font-size:16px;font-weight:700;cursor:pointer;font-family:‘Plus Jakarta Sans’,sans-serif;margin-top:8px;}
+.suc-sub{font-size:15px;color:#6b7280;line-height:1.6;margin-bottom:28px;}
+.btn-new{background:#1e2230;border:1px solid #2a2f3d;color:#f0f2f7;border-radius:14px;padding:16px 32px;font-size:16px;font-weight:700;cursor:pointer;font-family:‘Plus Jakarta Sans’,sans-serif;}
 
 /* NOTICE */
-.notice{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:14px 16px;font-size:14px;color:#fbbf24;font-weight:500;margin:12px 16px 0;}
+.notice{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:14px 16px;font-size:14px;color:#fbbf24;font-weight:500;margin:14px 16px 0;}
 
 /* TOAST */
-.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(–card2);border:1px solid var(–border);color:var(–text);padding:14px 22px;border-radius:14px;font-size:14px;font-weight:600;z-index:999;white-space:nowrap;opacity:0;transition:opacity 0.3s;pointer-events:none;max-width:88vw;text-align:center;}
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#1e2230;border:1px solid #2a2f3d;color:#f0f2f7;padding:14px 22px;border-radius:14px;font-size:14px;font-weight:600;z-index:999;white-space:nowrap;opacity:0;transition:opacity 0.3s;pointer-events:none;max-width:88vw;text-align:center;}
 .toast.show{opacity:1;}
-.toast.error{background:rgba(239,68,68,0.2);border-color:var(–danger);color:var(–danger);}
-.toast.success{background:rgba(0,229,160,0.15);border-color:var(–accent);color:var(–accent);}
+.toast.error{background:rgba(239,68,68,0.2);border-color:#ef4444;color:#ef4444;}
+.toast.success{background:rgba(0,229,160,0.15);border-color:#00e5a0;color:#00e5a0;}
 
 .spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
@@ -197,17 +185,37 @@ select option{background:var(–card2);color:#fff;}
     <div><div class="hero-ttl">Personal Info</div><div class="hero-sub">Tell us who you are</div></div>
   </div>
   <div class="card">
-    <div class="field"><div class="f-lbl">Full Name <span class="req">*</span></div><input type="text" id="repName" placeholder="Enter your full name"/></div>
-    <div class="field"><div class="f-lbl">Employee ID <span class="req">*</span></div><input type="text" id="empId" placeholder="e.g. EMP001"/></div>
-    <div class="field"><div class="f-lbl">Phone Number <span class="req">*</span></div><input type="tel" id="phone" placeholder="+91 XXXXX XXXXX"/></div>
-    <div class="field"><div class="f-lbl">Store / Area Name <span class="req">*</span></div><input type="text" id="storeName" placeholder="Enter store name"/></div>
+    <div class="field">
+      <div class="f-lbl">Full Name <span class="req">*</span></div>
+      <input type="text" id="repName" placeholder="Enter your full name"/>
+    </div>
+    <div class="field">
+      <div class="f-lbl">Employee ID <span class="req">*</span></div>
+      <input type="text" id="empId" placeholder="e.g. EMP001"/>
+    </div>
+    <div class="field">
+      <div class="f-lbl">Phone Number <span class="req">*</span></div>
+      <input type="tel" id="phone" placeholder="+91 XXXXX XXXXX"/>
+    </div>
+    <div class="field">
+      <div class="f-lbl">Store / Area Name <span class="req">*</span></div>
+      <input type="text" id="storeName" placeholder="Enter store name"/>
+    </div>
     <div class="two-col">
-      <div class="field"><div class="f-lbl">Region</div><input type="text" id="region" placeholder="e.g. Mumbai"/></div>
-      <div class="field"><div class="f-lbl">Date</div><input type="date" id="reportDate"/></div>
+      <div class="field">
+        <div class="f-lbl">Region</div>
+        <input type="text" id="region" placeholder="e.g. Mumbai"/>
+      </div>
+      <div class="field">
+        <div class="f-lbl">Date</div>
+        <input type="date" id="reportDate"/>
+      </div>
     </div>
   </div>
   <div class="spacer"></div>
-  <div class="nav-fixed"><button class="btn-next" style="flex:1;" onclick="nextPage(0)">Continue →</button></div>
+  <div class="nav-fixed">
+    <button class="btn-next" style="flex:1;" onclick="nextPage(0)">Continue →</button>
+  </div>
 </div>
 
 <!-- PAGE 1: CHECK-IN -->
@@ -231,18 +239,31 @@ select option{background:var(–card2);color:#fff;}
   </div>
   <div class="card">
     <div class="c-ttl">🕐 Check-In Time</div>
-    <div class="t-chip"><div class="t-ico">🕐</div><div><div class="t-val" id="cinTD">Auto-records on Next</div><div class="t-sub">Captured automatically</div></div></div>
+    <div class="t-chip">
+      <div class="t-ico">🕐</div>
+      <div><div class="t-val" id="cinTD">Auto-records on Next</div><div class="t-sub">Captured automatically</div></div>
+    </div>
     <input type="hidden" id="cin_lat"/><input type="hidden" id="cin_lng"/><input type="hidden" id="cin_time"/>
   </div>
   <div class="card">
     <div class="c-ttl">📍 Your Location</div>
-    <div class="gps-row" id="gc1"><div class="g-dot" id="gd1"></div><div class="g-txt" id="gt1">Tap Capture to get your GPS location</div><button class="btn-loc" onclick="doGPS(1)">📍 Capture</button></div>
+    <div class="gps-row" id="gc1">
+      <div class="g-dot" id="gd1"></div>
+      <div class="g-txt" id="gt1">Tap Capture to get your GPS location</div>
+      <button class="btn-loc" onclick="doGPS(1)">📍 Capture</button>
+    </div>
   </div>
   <div class="card">
-    <div class="field"><div class="f-lbl">Notes (Optional)</div><textarea id="cinNotes" placeholder="Any notes about this visit..."></textarea></div>
+    <div class="field">
+      <div class="f-lbl">Notes (Optional)</div>
+      <textarea id="cinNotes" placeholder="Any notes about this visit..."></textarea>
+    </div>
   </div>
   <div class="spacer"></div>
-  <div class="nav-fixed"><button class="btn-back" onclick="prevPage(1)">← Back</button><button class="btn-next" onclick="nextPage(1)">Continue →</button></div>
+  <div class="nav-fixed">
+    <button class="btn-back" onclick="prevPage(1)">← Back</button>
+    <button class="btn-next" onclick="nextPage(1)">Continue →</button>
+  </div>
 </div>
 
 <!-- PAGE 2: STOCK -->
@@ -261,12 +282,17 @@ select option{background:var(–card2);color:#fff;}
     <div class="c-ttl">📄 Upload Stock Sheet</div>
     <div class="upload-box">
       <input type="file" id="stockFile" accept="image/*,.pdf,.xlsx,.xls" onchange="doUpload(this,'stockPrev')"/>
-      <div class="u-ico">📋</div><div class="u-ttl">Tap to upload stock sheet</div><div class="u-sub">Photo, PDF or Excel</div>
+      <div class="u-ico">📋</div>
+      <div class="u-ttl">Tap to upload stock sheet</div>
+      <div class="u-sub">Photo, PDF or Excel</div>
       <img class="preview" id="stockPrev" alt=""/>
     </div>
   </div>
   <div class="spacer"></div>
-  <div class="nav-fixed"><button class="btn-back" onclick="prevPage(2)">← Back</button><button class="btn-next" onclick="nextPage(2)">Continue →</button></div>
+  <div class="nav-fixed">
+    <button class="btn-back" onclick="prevPage(2)">← Back</button>
+    <button class="btn-next" onclick="nextPage(2)">Continue →</button>
+  </div>
 </div>
 
 <!-- PAGE 3: EXPENSES -->
@@ -283,7 +309,10 @@ select option{background:var(–card2);color:#fff;}
   </div>
   <div class="notice">💡 No expenses today? Just tap Continue to skip.</div>
   <div class="spacer"></div>
-  <div class="nav-fixed"><button class="btn-back" onclick="prevPage(3)">← Back</button><button class="btn-next" onclick="nextPage(3)">Continue →</button></div>
+  <div class="nav-fixed">
+    <button class="btn-back" onclick="prevPage(3)">← Back</button>
+    <button class="btn-next" onclick="nextPage(3)">Continue →</button>
+  </div>
 </div>
 
 <!-- PAGE 4: EXPIRED -->
@@ -296,11 +325,14 @@ select option{background:var(–card2);color:#fff;}
   <div class="card" style="padding-bottom:14px;">
     <div class="c-ttl">🗑 Expired Items</div>
     <div id="expiredItems"></div>
-    <button class="btn-add" style="border-color:var(--danger);color:var(--danger);background:rgba(239,68,68,0.08);" onclick="addExpired()">＋ Add Expired Product</button>
+    <button class="btn-add" style="border-color:#ef4444;color:#ef4444;background:rgba(239,68,68,0.08);" onclick="addExpired()">＋ Add Expired Product</button>
   </div>
   <div class="notice">✅ No expired products found? Just tap Continue.</div>
   <div class="spacer"></div>
-  <div class="nav-fixed"><button class="btn-back" onclick="prevPage(4)">← Back</button><button class="btn-next" onclick="nextPage(4)">Continue →</button></div>
+  <div class="nav-fixed">
+    <button class="btn-back" onclick="prevPage(4)">← Back</button>
+    <button class="btn-next" onclick="nextPage(4)">Continue →</button>
+  </div>
 </div>
 
 <!-- PAGE 5: CHECK-OUT -->
@@ -324,18 +356,28 @@ select option{background:var(–card2);color:#fff;}
   </div>
   <div class="card">
     <div class="c-ttl">🕕 Check-Out Time</div>
-    <div class="t-chip" style="background:rgba(0,229,160,0.08);border-color:rgba(0,229,160,0.25);"><div class="t-ico">🕕</div><div><div class="t-val" id="coutTD">Auto-records on Submit</div><div class="t-sub">Captured automatically</div></div></div>
+    <div class="t-chip">
+      <div class="t-ico">🕕</div>
+      <div><div class="t-val" id="coutTD">Auto-records on Submit</div><div class="t-sub">Captured automatically</div></div>
+    </div>
     <input type="hidden" id="cout_lat"/><input type="hidden" id="cout_lng"/>
   </div>
   <div class="card">
     <div class="c-ttl">📍 Check-Out Location</div>
-    <div class="gps-row" id="gc2"><div class="g-dot" id="gd2"></div><div class="g-txt" id="gt2">Tap Capture to get your GPS location</div><button class="btn-loc" onclick="doGPS(2)">📍 Capture</button></div>
+    <div class="gps-row" id="gc2">
+      <div class="g-dot" id="gd2"></div>
+      <div class="g-txt" id="gt2">Tap Capture to get your GPS location</div>
+      <button class="btn-loc" onclick="doGPS(2)">📍 Capture</button>
+    </div>
   </div>
   <div class="card">
-    <div class="field"><div class="f-lbl">Day Summary</div><textarea id="daySummary" placeholder="Brief summary of today's work..."></textarea></div>
+    <div class="field">
+      <div class="f-lbl">Day Summary</div>
+      <textarea id="daySummary" placeholder="Brief summary of today's work..."></textarea>
+    </div>
   </div>
   <div class="card" style="background:rgba(0,229,160,0.05);border-color:rgba(0,229,160,0.2);">
-    <div class="c-ttl" style="color:var(--accent);">📋 Today's Summary</div>
+    <div class="c-ttl" style="color:#00e5a0;">📋 Today's Summary</div>
     <div class="sum-row"><span class="sl">Rep Name</span><span class="sv" id="sName">—</span></div>
     <div class="sum-row"><span class="sl">Employee ID</span><span class="sv" id="sEmpId">—</span></div>
     <div class="sum-row"><span class="sl">Store</span><span class="sv" id="sStore">—</span></div>
@@ -356,7 +398,7 @@ select option{background:var(–card2);color:#fff;}
 <div id="successScreen">
   <div class="suc-ico">✓</div>
   <div class="suc-ttl">Report Submitted!</div>
-  <div class="suc-sub">Your daily report has been saved successfully.<br>Your manager can now view your data.</div>
+  <div class="suc-sub">Your daily report has been saved.<br>Your manager can now view your data.</div>
   <div class="card" style="text-align:left;margin-bottom:20px;">
     <div class="sum-row"><span class="sl">Submitted By</span><span class="sv" id="sucName">—</span></div>
     <div class="sum-row"><span class="sl">Date</span><span class="sv" id="sucDate">—</span></div>
